@@ -1,7 +1,6 @@
 export default function Login() {
     return (
 
-        <!-- Login Page ( Only for Guest users ) -->
         <section id="login-page" className="auth">
             <form id="login">
 
