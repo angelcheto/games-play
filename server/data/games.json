@@ -1,6 +1,6 @@
 {
     "5993d03a-724c-4152-95e3-a0b900103b16": {
-        "tittle": "Warframe",
+        "title": "Warframe",
         "category": "Collection Shooter",
         "maxLevel": "9999",
         "imageUrl": "https://www-static.warframe.com/images/longlanding/warframe-metacard.png",
@@ -8,7 +8,7 @@
         "_id": "5993d03a-724c-4152-95e3-a0b900103b16"
     },
     "0e6bb009-a3eb-42ae-8c77-aebe07289855": {
-        "tittle": "League of Legends",
+        "title": "League of Legends",
         "category": "MOBA",
         "maxLevel": "18",
         "imageUrl": "https://cdn1.epicgames.com/offer/24b9b5e323bc40eea252a10cdd3b2f10/EGS_LeagueofLegends_RiotGames_S1_2560x1440-80471666c140f790f28dff68d72c384b",
