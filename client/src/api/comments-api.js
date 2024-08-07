@@ -9,7 +9,10 @@ const getAll = async (getId) => {
     const comments = Object.values(result);
     return comments;
 }
-export default {
+
+const commentsAPI =  {
     create,
     getAll,
 }
+
+export default commentsAPI;

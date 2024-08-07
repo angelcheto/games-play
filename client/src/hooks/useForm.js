@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function useForm(initialValues, submitHandler) {
+export function useForm(initialValues, submitCallback) {
     const [values, setValues] = useState(initialValues);
 
     // TODO: add support for checkbox
