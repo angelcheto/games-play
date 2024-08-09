@@ -1,5 +1,4 @@
 import { Routes, Route } from 'react-router-dom';
-
 import Header from "./components/header/Header"
 import Home from './components/home/Home';
 import Login from './components/login/Login';
@@ -7,11 +6,25 @@ import Register from './components/register/Register';
 import GameList from './components/game-list/GameList';
 import GameCreate from './components/game-create/GameCreate';
 import GameDetails from './components/game-details/GameDetails';
+import { useState } from 'react';
+import {AuthContext} from './contexts/AuthContext'
 
 
 function App() {
+  const [authState, setAuthState] = useState({});
+  const changeAuthState = (state) => {
+    setAuthState(state);
+  };
+
+  const contextData = {
+    email: authState.email, 
+    accesToken: authState.accesToken,
+    isAuthenticated: !!authState.email,
+    changeAuthState,
+  };
 
   return (
+    <AuthContext.Provider value={contextData}>
     <div id="box">
       <Header />
 
@@ -29,6 +42,7 @@ function App() {
 
 
       </div>
+    </AuthContext.Provider>
   )
 }
 

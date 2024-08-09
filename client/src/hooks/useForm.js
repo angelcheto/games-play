@@ -9,14 +9,14 @@ export function useForm(initialValues, submitCallback) {
             ...state,
             [e.target.name]: e.target.value
         }))
-    }
+    };
 
-        const submitHandler = (e) => {
-            e.preventDefualt();
-            submitCallback(values);
-        }
+    const submitHandler = (e) => {
+        e.preventDefault();  
+        submitCallback(values);
+    };
 
     return {
-        changeHandler, values
+        submitHandler, changeHandler, values
     };
 }
