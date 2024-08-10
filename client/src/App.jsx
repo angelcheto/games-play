@@ -11,14 +11,18 @@ import {AuthContext} from './contexts/AuthContext'
 
 
 function App() {
-  const [authState, setAuthState] = useState({});
-  const changeAuthState = (state) => {
-    setAuthState(state);
-  };
+  const [authState, setAuthState] = useState({
+    email: '',
+    accessToken: ''
+  });
 
+  const changeAuthState = (state) => {
+    setAuthState(prevState => ({ ...prevState, ...state }));
+  };
+  
   const contextData = {
     email: authState.email, 
-    accesToken: authState.accesToken,
+    accesToken: authState.accessToken,
     isAuthenticated: !!authState.email,
     changeAuthState,
   };

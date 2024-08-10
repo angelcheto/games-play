@@ -6,7 +6,7 @@ async function requester(method, url, data) {
     }
 
     if (data) {
-        options.header = {
+        options.headers = {
             'Content-Type': 'application/json'
 
         };
@@ -15,7 +15,7 @@ async function requester(method, url, data) {
     }
 
 
-    const response = await fetch (url, options);
+    const response = await fetch(url, options);
     const result = await response.json();
 
     if (!response.ok) {

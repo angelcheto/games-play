@@ -3,7 +3,7 @@ import { useRegister } from "../../hooks/useAuth";
 import { useForm } from "../../hooks/useForm";
 import { useState } from "react";
 
-const initalValues = { email: '', password: '', conPassword: '' };
+const initialValues = { email: '', password: '', conPassword: '' };
 
 export default function Register() {
     const [error, setError] = useState('');
@@ -20,12 +20,13 @@ export default function Register() {
             await register(values.email, values.password)
             navigate('/');
         } catch (err) {
+            console.error('Register failed:', err);
             setError(err.message);
         }
     
     };
 
-    const { values, changeHandler, submitHandler } = useForm(initalValues, registerHandler);
+    const { values, changeHandler, submitHandler } = useForm(initialValues, registerHandler);
 
     return (
 
@@ -47,7 +48,7 @@ export default function Register() {
                     }
                     placeholder="maria@email.com"/>
 
-                    <label htmlFor="pass">Password:</label>
+                    <label htmlFor="register-password">Password:</label>
                     <input 
                     type="password" 
                     name="password" 
@@ -56,7 +57,7 @@ export default function Register() {
                     onChange={changeHandler}
                     />
 
-                    <label htmlFor="con-pass">Confirm Password:</label>
+                    <label htmlFor="conPassword">Confirm Password:</label>
                     <input 
                     type="password" 
                     name="conPassword" 

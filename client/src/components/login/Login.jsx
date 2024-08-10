@@ -5,7 +5,7 @@ import { useForm } from "../../hooks/useForm";
 const initalValues = { email: '', password: '' };
 
 export default function Login() {
-    const navigate = useNavigate();  // Don't forget to call the hook
+    const navigate = useNavigate();  
     const login = useLogin();
 
     const loginHandler = async ({ email, password }) => {
@@ -13,6 +13,7 @@ export default function Login() {
             await login(email, password);
             navigate('/');
         } catch (err) {
+            console.error('Login failed:', err);
             console.log(err.message);
         }
     };
