@@ -20,8 +20,7 @@ export default function Register() {
             await register(values.email, values.password)
             navigate('/');
         } catch (err) {
-            console.error('Register failed:', err);
-            setError(err.message);
+    setError(err.message);
         }
     
     };
@@ -43,12 +42,10 @@ export default function Register() {
                     id="email" 
                     name="email" 
                     value={values.email}
-                    onChange={changeHandler
-
-                    }
+                    onChange={changeHandler}
                     placeholder="maria@email.com"/>
 
-                    <label htmlFor="register-password">Password:</label>
+                    <label htmlFor="Password">Password:</label>
                     <input 
                     type="password" 
                     name="password" 
@@ -67,8 +64,8 @@ export default function Register() {
                     />
 
                     {error && (
-                    <p className="field">
-                    <span>{error}</span>
+                    <p>
+                    <span style={{fontSize: '18px', color: 'red'}}>{error}</span>
                     </p>                        
                     )}
 

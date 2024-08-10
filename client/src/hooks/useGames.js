@@ -5,8 +5,10 @@ export function useGetAllGames(){
     const [games, setGames] = useState([]);
 
     useEffect(() => {
-        gamesAPI.getAll()
-        .then(result => setGames(result));
+        (async () => {
+            const result = await gamesAPI.getAll();
+            setGames(result);
+        })();
     }, []); 
 
     return [games, setGames];
@@ -20,7 +22,7 @@ export function useGetOneGames(gameId) {
             const result = await gamesAPI.getOne(gameId);
             setGame(result);
         })();
-    }, []);
+    }, [gameId]);
 
     return [
         game, setGame,

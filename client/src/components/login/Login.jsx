@@ -2,27 +2,22 @@ import { useNavigate } from "react-router-dom";
 import { useLogin } from "../../hooks/useAuth";
 import { useForm } from "../../hooks/useForm";
 
-const initalValues = { email: '', password: '' };
+const initialValues = { email: '', password: '' };
 
 export default function Login() {
-    const navigate = useNavigate();  
     const login = useLogin();
+    const navigate = useNavigate();  
 
     const loginHandler = async ({ email, password }) => {
         try {
             await login(email, password);
             navigate('/');
         } catch (err) {
-            console.error('Login failed:', err);
-            console.log(err.message);
+            console.error(err.message);
         }
     };
 
-    const { values, changeHandler, submitHandler } = 
-    useForm(
-        initalValues, 
-        loginHandler
-    );
+    const { values, changeHandler, submitHandler } = useForm(initialValues, loginHandler);
 
     return (
         <section id="login-page" className="auth">
@@ -40,10 +35,10 @@ export default function Login() {
                         placeholder="Sokka@gmail.com" 
                         autoComplete="email"
                     />
-                    <label htmlFor="login-password">Password:</label>
+                    <label htmlFor="password">Password:</label>
                     <input 
                         type="password" 
-                        id="login-password" 
+                        id="password" 
                         name="password"
                         value={values.password}
                         onChange={changeHandler}
