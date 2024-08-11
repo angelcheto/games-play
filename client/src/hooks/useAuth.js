@@ -14,7 +14,7 @@ export const useLogin = () => {
 };
 
 export const useRegister = () => {
-    const { changeAuthState } = useContext(AuthContext);
+    const { changeAuthState } = useAuthContext();
 
     const registerHandler = async (email, password) => {
 
