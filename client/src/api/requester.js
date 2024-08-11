@@ -1,18 +1,11 @@
 async function requester(method, url, data) {
     const options = {};
     
-    // const accessToken = localStorage.getItem('accessToken');
+    const accessToken = localStorage.getItem('accessToken');
 
-    // if (accessToken) {
-    //     options.headers = {
-    //         ...options.headers, 'X-Authorization': accessToken,
-    //     }
-    // }
-
-    if (localStorage.getItem('accessToken') && !url.includes('/register')) {
+    if (accessToken) {
         options.headers = {
-            ...options.headers, 
-            'X-Authorization': localStorage.getItem('accessToken'),
+            ...options.headers, 'X-Authorization': accessToken,
         }
     }
 
@@ -31,6 +24,10 @@ async function requester(method, url, data) {
 
 
     const response = await fetch(url, options);
+    if(response.status === 204) {
+        return;
+    }
+
     const result = await response.json();
 
     if (!response.ok) {
