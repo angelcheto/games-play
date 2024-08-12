@@ -44,7 +44,7 @@ export default function GameDetails() {
                     <ul>
                         { comments.map (comment => (
                             <li key={comment._id} className="comment">
-                                <p>Username: {comment.text}</p>
+                                <p>{comment.author.email}: {comment.text}</p>
                             </li>
                         ))
                         
