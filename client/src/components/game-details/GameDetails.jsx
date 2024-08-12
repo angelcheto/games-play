@@ -1,32 +1,24 @@
-import { useState } from "react";
 import { useParams } from "react-router-dom";
-import commentsApi from "../../api/comments-api";
 import { useGetOneGames } from "../../hooks/useGames";
+import { useForm } from "../../hooks/useForm";
+import { useAuthContext } from "../../contexts/AuthContext";
+import { useCreateComment, useGetAllComments } from "../../hooks/useComments";
+
+const initialValues = {
+    comment: ''
+}
 
 export default function GameDetails() {
     const { gameId } = useParams();
-    const [game, setGame] = useGetOneGames(gameId);
-    const [username, setUsername] = useState('');
-    const [comment, setComment] = useState('');
-   
-
-    const commentSubmitHandler = async (e) => {
-        e.preventDefault();
-        const newComment = await commentsApi.create(gameId, username, comment);
-        
-        // TODO: Refractor this
-        setGame(previousState => ({
-            ...previousState,
-            comments: {
-                ...previousState.comments,
-                [newComment._id]: newComment,
-            }
-        }));
-
-        setUsername('');
-        setComment('');
-
-    }
+    const [comments, setComments] = useGetAllComments(gameId);
+    const createComment = useCreateComment();
+    const [game] = useGetOneGames(gameId);
+    const { isAuthenticated } = useAuthContext();
+    const {changeHandler, submitHandler, values
+    } = useForm(initialValues, ({ comment }) => {
+        createComment(gameId, comment);
+    });
+ 
 
     return(
         <section id="game-details">
@@ -45,16 +37,15 @@ export default function GameDetails() {
                 <div className="details-comments">
                     <h2>Comments:</h2>
                     <ul>
-                        { Object.keys(game.comments || {}).length > 0
-                        ? Object.values(game.comments).map (comment => (
+                        { comments.map (comment => (
                             <li key={comment._id} className="comment">
-                                <p>{comment.username}: {comment.text}</p>
+                                <p>Username: {comment.text}</p>
                             </li>
-                         ))
-                            : <p className="no-comment">No comments.</p> 
+                        ))
+                        
                         }
                    </ul>
-
+                    {comments.length ===0 && <p className="no-comment">No comments.</p>}
                 </div>
 
                 <div className="buttons">
@@ -63,25 +54,21 @@ export default function GameDetails() {
                 </div>
             </div>
 
+        {isAuthenticated && (                
             <article className="create-comment">
                 <label>Add new comment:</label>
-                <form className="form" onSubmit={commentSubmitHandler}>
-                    <input  
-                        type="text"  
-                        placeholder="Ivan"  
-                        name="username" 
-                        onChange={(e) => setUsername(e.target.value)} value={username} />
+                <form className="form" onSubmit={submitHandler}>
 
                         <textarea 
                             name="comment" 
                             placeholder="Comment......"
-                            onChange={(e) => setComment(e.target.value)} value={comment}
+                            onChange={changeHandler} value={values.comment}
                         ></textarea>
 
                     <input className="btn submit" type="submit" value="Add Comment"/>
                 </form>
             </article>
-
+        )}
         </section>
     );
 } 
