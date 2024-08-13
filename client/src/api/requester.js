@@ -1,26 +1,21 @@
 import { getAccessToken } from "../utils/authUtils";
 
 async function requester(method, url, data) {
-    const options = {};
-    
+   
+    const options = {
+        method: method !== 'GET' 
+        ? method 
+        : 'GET',
+        headers: {}
+    };
+
     const accessToken = getAccessToken();
-
     if (accessToken) {
-        options.headers = {
-            ...options.headers, 'X-Authorization': accessToken,
-        }
-    }
-
-    if (method !== 'GET') {
-        options.method = method;
+        options.headers['X-Authorization'] = accessToken;
     }
 
     if (data) {
-        options.headers = {
-            ...options.headers,
-            'Content-Type': 'application/json',
-        };
-
+        options.headers['Content-Type'] = 'application/json';
         options.body = JSON.stringify(data);
     }
 
