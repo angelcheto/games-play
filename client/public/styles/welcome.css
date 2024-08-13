@@ -87,7 +87,7 @@
 
 .image-wrap {
     width: 250px;
-    height: 250px;
+    height: auto;
     display: inline-block;
     border-radius: 50%;
     overflow: hidden;
