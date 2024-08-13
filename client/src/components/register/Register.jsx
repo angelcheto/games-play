@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useRegister } from "../../hooks/useAuth";
 import { useForm } from "../../hooks/useForm";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const initialValues = { email: '', password: '', conPassword: '' };
 
@@ -20,7 +21,7 @@ export default function Register() {
             await register(values.email, values.password)
             navigate('/');
         } catch (err) {
-    setError(err.message);
+            setError(err.message);
         }
     
     };
@@ -38,41 +39,47 @@ export default function Register() {
 
                     <label htmlFor="email">Email:</label>
                     <input 
-                    type="email" 
-                    id="email" 
-                    name="email" 
-                    value={values.email}
-                    onChange={changeHandler}
-                    placeholder="maria@email.com"/>
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        value={values.email}
+                        onChange={changeHandler}
+                        placeholder="maria@email.com"
+                        autoComplete="email"
+                    />
 
                     <label htmlFor="Password">Password:</label>
                     <input 
-                    type="password" 
-                    name="password" 
-                    id="register-password"
-                    value={values.password}
-                    onChange={changeHandler}
+                        type="password" 
+                        name="password" 
+                        id="register-password"
+                        value={values.password}
+                        onChange={changeHandler}
+                        autoComplete="new-password"
                     />
 
                     <label htmlFor="conPassword">Confirm Password:</label>
                     <input 
-                    type="password" 
-                    name="conPassword" 
-                    id="conPassword"
-                    value={values.conPassword}
-                    onChange={changeHandler}
+                        type="password" 
+                        name="conPassword" 
+                        id="conPassword"
+                        value={values.conPassword}
+                        onChange={changeHandler}
+                        autoComplete="new-password"
                     />
 
                     {error && (
                     <p>
-                    <span style={{fontSize: '18px', color: 'red'}}>{error}</span>
+                        <span style={{fontSize: '18px', color: 'red'}}>{error}</span>
                     </p>                        
                     )}
 
                     <input className="btn submit" type="submit" value="Register"/>
 
-                    <p>
-                        <span>If you already have profile click <a href="#">here</a></span>
+                    <p style={{ marginTop: '30px' }}>
+                        <span style={{ fontSize: '18px', color: 'white', backgroundColor: 'gray', padding: '10px', borderRadius: '15px', borderColor: 'black' }}>
+                            If you already have a profile, click<Link to="/login" style={{ color: 'white', textDecoration: 'underline' }}>here.</Link>
+                        </span>
                     </p>
                 </div>
             </form>

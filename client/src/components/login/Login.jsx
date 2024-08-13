@@ -1,10 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { useLogin } from "../../hooks/useAuth";
 import { useForm } from "../../hooks/useForm";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const initialValues = { email: '', password: '' };
 
 export default function Login() {
+    const [error, setError] = useState('');
     const login = useLogin();
     const navigate = useNavigate();  
 
@@ -13,7 +16,7 @@ export default function Login() {
             await login(email, password);
             navigate('/');
         } catch (err) {
-            console.error(err.message);
+            setError(err.message);  
         }
     };
 
@@ -25,6 +28,7 @@ export default function Login() {
                 <div className="container">
                     <div className="brand-logo"></div>
                     <h1>Login</h1>
+                    
                     <label htmlFor="email">Email:</label>
                     <input 
                         type="email" 
@@ -35,6 +39,7 @@ export default function Login() {
                         placeholder="Sokka@gmail.com" 
                         autoComplete="email"
                     />
+
                     <label htmlFor="password">Password:</label>
                     <input 
                         type="password" 
@@ -44,9 +49,19 @@ export default function Login() {
                         onChange={changeHandler}
                         autoComplete="current-password"
                     />
+
+                    {error && (
+                        <p>
+                            <span style={{fontSize: '18px', color: 'red'}}>{error}</span>
+                        </p>
+                    )}
+
                     <input type="submit" className="btn submit" value="Login" />
-                    <p className="field">
-                        <span>If you don't have a profile, click <a href="#">here</a></span>
+
+                    <p style={{ marginTop: '30px' }}>
+                        <span style={{ fontSize: '18px', color: 'white', backgroundColor: 'gray', padding: '10px', borderRadius: '15px', borderColor: 'black' }}>
+                            If you don't have a profile, click<Link to="/register" style={{ color: 'white', textDecoration: 'underline' }}> here.</Link>
+                        </span>
                     </p>
                 </div>
             </form>
