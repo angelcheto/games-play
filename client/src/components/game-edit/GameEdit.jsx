@@ -18,7 +18,7 @@ export default function GameEdit() {
             await gamesAPI.update(gameId, values);
             navigate(`/games/${gameId}/details`);
         }
-    }, {reinitializeForm: true });
+    }, true);
 
     return(
         <section id="edit-page" className="auth">
