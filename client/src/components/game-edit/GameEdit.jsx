@@ -12,11 +12,11 @@ export default function GameEdit() {
         submitHandler,
         values,
     } = useForm(game, async (values) => {
-        
-        const isConfirmed = confirm('Are you sure you want to update this game?')
-        if (isConfirmed) {
+        try {
             await gamesAPI.update(gameId, values);
             navigate(`/games/${gameId}/details`);
+        } catch (err) {
+            console.error("Failed to update the game:", err.message);
         }
     }, true);
 
