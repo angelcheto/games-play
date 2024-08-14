@@ -1,10 +1,12 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams} from "react-router-dom";
 import { useGetOneGames } from "../../hooks/useGames";
 import { useForm } from "../../hooks/useForm";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { useCreateComment, useGetAllComments } from "../../hooks/useComments";
 import gamesAPI from "../../api/games-api";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import ConfirmModal from "../confirm-modal/ConfirmModal";
 
 const initialValues = {
     comment: ''
@@ -23,25 +25,29 @@ export default function GameDetails() {
         try {
             const newComment = await createComment(gameId, comment);
 
-            // setComments(oldComments => [ ...oldComments, newComment])
             dispatch({type: 'ADD_COMMENT', payload: {...newComment, author: { email } }})
         } catch (err) {
             console.log(err.message);
         }    
     });
 
-    const gameDeleteHandler = async () => {
-        const isConfirmed = confirm(`Are you sure you want to delete ${game.title}?`)
-        if (!isConfirmed) {
-           return;
-        }
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
+    const gameDeleteHandler = async () => {
+        setIsModalOpen(true);
+    }
+
+    const handleConfirmDelete = async () => {
         try {
             await gamesAPI.remove(gameId);
-            navigate('/'); 
+            navigate('/');
         } catch(err) {
             console.log(err.message);
         }
+    }
+
+    const handleCancelDelete = () => {
+        setIsModalOpen(false);
     }
  
     const isOwner = userId === game._ownerId;
@@ -95,6 +101,16 @@ export default function GameDetails() {
                     <input className="btn submit" type="submit" value="Add Comment"/>
                 </form>
             </article>
+        )}
+
+        {isModalOpen && (
+            <ConfirmModal 
+                title="Confirm Deletion"
+                message={`Are you sure you want to delete ${game.title}?`}
+                onConfirm={handleConfirmDelete}
+                onCancel={handleCancelDelete}
+            />
+
         )}
         </section>
     );
