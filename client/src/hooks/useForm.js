@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 export function useForm(initialValues, submitCallback, reinitializeForm = false) {
-    const [values, setValues] = useState(initialValues);
+    const [values, setValues] = useState(initialValues || {});
 
     useEffect(() => {
         if (reinitializeForm) {     
@@ -10,14 +10,14 @@ export function useForm(initialValues, submitCallback, reinitializeForm = false)
     }, [initialValues]);
 
     // TODO: add support for checkbox
-    const changeHandler = (e) => {
+    const handleChange = (e) => {
         setValues(state => ({   
             ...state,
             [e.target.name]: e.target.value
         }))
     };
 
-    const submitHandler = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         await submitCallback(values);
         setValues(initialValues);
@@ -25,7 +25,8 @@ export function useForm(initialValues, submitCallback, reinitializeForm = false)
 
     return {
         values,
-        changeHandler, 
-        submitHandler, 
+        changeHandler: handleChange,
+        submitHandler: handleSubmit,
+        setValues,
     };
 }
