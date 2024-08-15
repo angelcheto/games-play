@@ -9,7 +9,6 @@ export function useForm(initialValues, submitCallback, reinitializeForm = false)
         }
     }, [initialValues]);
 
-    // TODO: add support for checkbox
     const handleChange = (e) => {
         setValues(state => ({   
             ...state,
