@@ -1339,18 +1339,18 @@
     	}
     };
     var seedData = {
-    	games: {
-            "811e35cc-9cce-4892-a86b-53fbd03dba7f": {
-                "_ownerId": "46936066-81ac-411c-911a-153d467434ae",
-                "title": "Warframe",
-                "category": "Collection Shooter",
-                "maxLevel": "9999",
-                "imageUrl": "https://www-static.warframe.com/images/longlanding/warframe-metacard.png",
-                "summary": "Warframe is a free-to-play action role-playing third-person shooter multiplayer online game developed and published by Digital Extremes.",
-                "_createdOn": 1723381834137,
-                "_id": "811e35cc-9cce-4892-a86b-53fbd03dba7f"
-            }
-        }
+    	// games: {
+        //     "811e35cc-9cce-4892-a86b-53fbd03dba7f": {
+        //         "_ownerId": "46936066-81ac-411c-911a-153d467434ae",
+        //         "title": "Warframe",
+        //         "category": "Collection Shooter",
+        //         "maxLevel": "9999",
+        //         "imageUrl": "https://www-static.warframe.com/images/longlanding/warframe-metacard.png",
+        //         "summary": "Warframe is a free-to-play action role-playing third-person shooter multiplayer online game developed and published by Digital Extremes.",
+        //         "_createdOn": 1723381834137,
+        //         "_id": "811e35cc-9cce-4892-a86b-53fbd03dba7f"
+        //     }
+        // }
     };
 
     var rules$1 = {

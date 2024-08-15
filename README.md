@@ -37,7 +37,7 @@
 - [x] Auth API
   - [x] Login
   - [x] Register
-  - [ ] Logout
+  - [x] Logout
 - [x] Auth API hook
   - [x] Login
   - [x] Register
@@ -54,4 +54,4 @@
 - [x] Create game
   - [x] API function
   - [x] Hook
-- [x] Latest games
+- [ ] Latest games

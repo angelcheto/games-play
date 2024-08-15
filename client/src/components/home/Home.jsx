@@ -9,7 +9,7 @@ export default function Home() {
         (async () => {
             const result = await gamesAPI.getLatest();
 
-            setLatestGames(result);
+            setLatestGames(result.reverse());
         })();
     }, []);
 

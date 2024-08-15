@@ -10,8 +10,8 @@ export const getAll = async () => {
 
 export const getLatest = async () => {
     const urlSearchParams = new URLSearchParams({
-        sortBy: '_createdOn desc',
-        pageSize: 3,
+        sortBy: '_createdOn',
+        pageSize: '3',
     });
 
     const result = await request.get(`${BASE_URL}?${urlSearchParams.toString()}`);
